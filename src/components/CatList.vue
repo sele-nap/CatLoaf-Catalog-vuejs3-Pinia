@@ -8,7 +8,7 @@
         </li>
       </ul>
       <input v-model="newCatName" placeholder="Add a new cat" />
-      <button @click="addNewCat">Add Cat</button>
+      <button @click="handleAddCat">Add Cat</button>
     </div>
   </template>
   
@@ -21,9 +21,9 @@
   
   const newCatName = ref('');
   
-  const addNewCat = () => {
+  const handleAddCat = () => {
     if (newCatName.value.trim()) {
-      addCat(newCatName.value);
+      catStore.addCat(newCatName.value);
       newCatName.value = '';
     }
   };
