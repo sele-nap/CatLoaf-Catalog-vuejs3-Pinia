@@ -23,7 +23,7 @@
   export default {
     name: 'CatComposer',
     setup() {
-      const title = ref('CatComposer');
+      const title = ref('CatLoaf Catalog');
       const searchTerm = ref('');
   
       const catStore = useCatStore();
