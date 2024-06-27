@@ -43,7 +43,6 @@
       });
   
       onMounted(() => {
-        console.log('Component mounted');
         fetchCats();
       });
   

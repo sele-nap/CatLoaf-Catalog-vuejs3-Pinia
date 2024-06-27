@@ -1,11 +1,9 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
-// Array of cat name parts
 const firstNames = ['Whiskers', 'Fluffy', 'Mittens', 'Luna', 'Oliver', 'Leo', 'Milo', 'Kitty', 'Nala', 'Simba', 'Bella', 'Lucy', 'Charlie', 'Max', 'Tiger'];
 const lastNames = ['Pawsome', 'Purrington', 'Meowser', 'Clawsome', 'Whiskerston', 'Furbottom', 'Tailchaser', 'Scratchington', 'Fluffster', 'Purrfect'];
 
-// Function to generate a random cat name
 function generateCatName() {
   const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
   const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
