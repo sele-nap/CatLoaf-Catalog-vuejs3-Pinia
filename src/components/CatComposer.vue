@@ -3,12 +3,13 @@
       <h1>{{ title }}</h1>
       <button @click="fetchCats">Fetch Cats</button>
       <p>Cat Count: {{ catCount }}</p>
-      <input v-model="searchTerm" placeholder="Search cats" />
+      <input v-model="searchTerm" placeholder="Search cats by name" />
       <div v-if="loading">Loading...</div>
       <div v-else-if="error">Error: {{ error }}</div>
       <ul v-else class="cat-list">
         <li v-for="cat in filteredCats" :key="cat.id" class="cat-item">
-          <img :src="cat.url" :alt="'Cat ' + cat.id" />
+          <img :src="cat.url" :alt="cat.name" />
+          <p>{{ cat.name }}</p>
         </li>
       </ul>
     </div>
@@ -31,7 +32,7 @@
   
       const filteredCats = computed(() => {
         return cats.value.filter(cat => 
-          cat.id.toLowerCase().includes(searchTerm.value.toLowerCase())
+          cat.name.toLowerCase().includes(searchTerm.value.toLowerCase())
         );
       });
   
