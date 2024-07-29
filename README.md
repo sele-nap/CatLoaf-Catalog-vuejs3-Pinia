@@ -39,14 +39,13 @@ CatLoaf Catalog is a simple Vue.js application that fetches cat images from the 
 - Vue.js 3: Front-end framework
 - Composition API: Reactive and composable API for Vue 3
 - Pinia: State management for Vue 3 applications
-- Axios: HTTP client for making API requests
 - Cat API: External API for fetching cat images
 
 ## Getting Started
 
 1. **Fetching Cats:**
    
-   The application fetches cat images from the [Cat API](https://thecatapi.com/) using Axios.
+   The application fetches cat images from the [Cat API](https://thecatapi.com/).
 
 2. **Searching Cats:**
    
