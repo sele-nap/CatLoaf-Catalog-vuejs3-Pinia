@@ -22,15 +22,11 @@ const props = defineProps({
 });
 
 const flipped = ref(false);
-const catStore = useCatStore();
 
 const flipCard = () => {
   flipped.value = !flipped.value;
 };
 
-onMounted(() => {
-  console.log(props.cat);
-});
 </script>
 
 <style scoped>

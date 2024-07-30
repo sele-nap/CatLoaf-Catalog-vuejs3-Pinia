@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useFetch } from '@vueuse/core';
 
 export const useCatStore = defineStore('catStore', () => {
   const cats = ref([]);
+  const getCats = computed( () => cats)
 
   const firstNames = ['Whiskers', 'Fluffy', 'Mittens', 'Luna', 'Oliver', 'Leo', 'Milo', 'Kitty', 'Nala', 'Simba', 'Bella', 'Lucy', 'Charlie', 'Max', 'Tiger'];
   const lastNames = ['Pawsome', 'Purrington', 'Meowser', 'Clawsome', 'Whiskerston', 'Furbottom', 'Tailchaser', 'Scratchington', 'Fluffster', 'Purrfect'];
@@ -21,11 +22,9 @@ export const useCatStore = defineStore('catStore', () => {
       console.error(error.value);
       return;
     }
-    
-    console.log('Cat data received:', data.value);
+
     const catData = JSON.parse(data.value);
     const catFacts = await fetchCatFacts(catData.length);
-
     cats.value = catData.map((cat, index) => ({
       id: cat.id,
       url: cat.url,
@@ -43,5 +42,5 @@ export const useCatStore = defineStore('catStore', () => {
     return JSON.parse(data.value).data;
   };
 
-  return { cats, fetchCats, fetchCatFacts };
+  return { getCats, fetchCats, fetchCatFacts };
 });
