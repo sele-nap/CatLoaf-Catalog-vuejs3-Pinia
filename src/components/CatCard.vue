@@ -11,22 +11,26 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useCatStore } from '../stores/catStore';
 
 const props = defineProps({
-  cat: Object,
+  cat: {
+    type: Object,
+    required: true
+  }
 });
 
 const flipped = ref(false);
 const catStore = useCatStore();
 
-const flipCard = async () => {
-  if (!props.cat.fact) {
-    await catStore.fetchCatFact(props.cat.id);
-  }
+const flipCard = () => {
   flipped.value = !flipped.value;
 };
+
+onMounted(() => {
+  console.log(props.cat);
+});
 </script>
 
 <style scoped>

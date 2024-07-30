@@ -7,6 +7,7 @@
     <div class="cat-grid">
       <CatCard v-for="cat in cats" :key="cat.id" :cat="cat" />
     </div>
+    <p>Number of cats: {{ cats.length }}</p>
   </div>
 </template>
 
@@ -16,12 +17,15 @@ import { useCatStore } from './stores/catStore';
 import CatCard from './components/CatCard.vue';
 
 const catStore = useCatStore();
+const { cats } = catStore;
 
 const loadCats = async () => {
+  console.log('loadCats called');
   await catStore.fetchCats();
 };
 
 onMounted(() => {
+  console.log('Component mounted');
   loadCats();
 });
 </script>
