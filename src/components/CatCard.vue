@@ -1,14 +1,17 @@
 <template>
   <div class="cat-card" @click="flipCard">
-    <div v-if="!flipped" class="card-front">
-      <img :src="cat.url" :alt="cat.name" />
-      <h3>{{ cat.name }}</h3>
-    </div>
-    <div v-else class="card-back">
-      <p>{{ cat.fact }}</p>
+    <div class="card-inner" :class="{ flipped }">
+      <div class="card-front">
+        <img :src="cat.url" :alt="cat.name" />
+        <h3>{{ cat.name }}</h3>
+      </div>
+      <div class="card-back">
+        <p>{{ cat.fact }}</p>
+      </div>
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue';
@@ -29,40 +32,74 @@ const flipCard = () => {
 
 <style scoped>
 .cat-card {
-  background-color: #ffe4e1;
-  border: 1px solid #ffccd5;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  cursor: pointer;
+  perspective: 1000px; /* Crée un effet de profondeur pour la rotation */
   width: 150px;
   height: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
   position: relative;
 }
 
-.cat-card img {
-  max-width: 100%;
-  height: 150px;
-  object-fit: cover;
+.card-inner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s; /* Durée de l'animation de rotation */
+  transform-style: preserve-3d; /* Préserve la transformation 3D */
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden; /* Cache la face arrière lors du retournement */
+  display: flex;
+  flex-direction: column; /* Aligne les éléments verticalement */
+  align-items: center; /* Centre horizontalement le contenu */
+  overflow: hidden; /* Cache le contenu débordant */
+}
+
+.card-front {
+  background-color: #ffe4e1;
+  border: 1px solid #ffccd5;
   border-radius: 10px;
+  z-index: 2; /* Assure que la face avant est au-dessus lorsqu'elle est visible */
+  transform: rotateY(0deg);
+  justify-content: center; /* Centre verticalement le contenu de la face avant */
 }
 
 .card-back {
+  background-color: #ffe4e1;
+  border: 1px solid #ffccd5;
+  border-radius: 10px;
+  transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  height: 100%;
-  overflow-y: auto;
+  justify-content: flex-start;
   padding: 10px;
+  overflow-y: auto;
   box-sizing: border-box;
+}
+
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front img {
+  max-width: 100%;
+  max-height: 60%;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.card-front h3 {
+  margin: 0;
+  padding: 0;
 }
 
 .card-back p {
   margin: 0;
   text-align: center;
+  max-width: 100%;
 }
 </style>
