@@ -30,12 +30,14 @@ onMounted(() => {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
 .app {
   text-align: center;
   background-color: #fff0f5;
   padding: 20px;
   font-family: 'Lato', sans-serif;
 }
+
 header {
   display: flex;
   justify-content: space-between;
@@ -44,13 +46,17 @@ header {
   background-color: #ffb6c1;
   border-radius: 10px;
 }
+
 .cat-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   gap: 20px;
   justify-content: center;
   padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
+
 .reload-button {
   background-color: #ff69b4;
   border: 2px solid #ff69b4;
@@ -62,10 +68,12 @@ header {
   transition: background-color 0.3s, color 0.3s;
   font-family: 'Lato', sans-serif;
 }
+
 .reload-button:hover {
   background-color: #ff1493;
   border-color: #ff1493;
 }
+
 .reload-button:active {
   background-color: #ff007f;
   border-color: #ff007f;

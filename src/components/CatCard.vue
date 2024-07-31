@@ -40,6 +40,7 @@ const flipCard = () => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
 }
 
 .cat-card img {
@@ -51,10 +52,13 @@ const flipCard = () => {
 
 .card-back {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   overflow-y: auto;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .card-back p {
