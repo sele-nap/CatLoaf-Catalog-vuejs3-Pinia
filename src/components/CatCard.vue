@@ -1,18 +1,17 @@
 <template>
   <div class="cat-card" @click="flipCard">
-    <div v-if="!flipped">
+    <div v-if="!flipped" class="card-front">
       <img :src="cat.url" :alt="cat.name" />
       <h3>{{ cat.name }}</h3>
     </div>
-    <div v-else>
+    <div v-else class="card-back">
       <p>{{ cat.fact }}</p>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useCatStore } from '../stores/catStore';
+import { ref } from 'vue';
 
 const props = defineProps({
   cat: {
@@ -26,7 +25,6 @@ const flipped = ref(false);
 const flipCard = () => {
   flipped.value = !flipped.value;
 };
-
 </script>
 
 <style scoped>
@@ -38,9 +36,29 @@ const flipCard = () => {
   text-align: center;
   cursor: pointer;
   width: 150px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
 .cat-card img {
   max-width: 100%;
+  height: 150px;
+  object-fit: cover;
   border-radius: 10px;
+}
+
+.card-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.card-back p {
+  margin: 0;
+  text-align: center;
 }
 </style>
