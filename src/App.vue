@@ -29,10 +29,12 @@ onMounted(() => {
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 .app {
   text-align: center;
   background-color: #fff0f5;
   padding: 20px;
+  font-family: 'Lato', sans-serif;
 }
 header {
   display: flex;
@@ -58,6 +60,7 @@ header {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
+  font-family: 'Lato', sans-serif;
 }
 .reload-button:hover {
   background-color: #ff1493;
