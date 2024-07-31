@@ -32,7 +32,7 @@ const flipCard = () => {
 
 <style scoped>
 .cat-card {
-  perspective: 1000px; /* Crée un effet de profondeur pour la rotation */
+  perspective: 1000px;
   width: 150px;
   height: 250px;
   position: relative;
@@ -42,28 +42,28 @@ const flipCard = () => {
   position: absolute;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s; /* Durée de l'animation de rotation */
-  transform-style: preserve-3d; /* Préserve la transformation 3D */
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
 }
 
 .card-front, .card-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden; /* Cache la face arrière lors du retournement */
+  backface-visibility: hidden;
   display: flex;
-  flex-direction: column; /* Aligne les éléments verticalement */
-  align-items: center; /* Centre horizontalement le contenu */
-  overflow: hidden; /* Cache le contenu débordant */
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
 }
 
 .card-front {
   background-color: #ffe4e1;
   border: 1px solid #ffccd5;
   border-radius: 10px;
-  z-index: 2; /* Assure que la face avant est au-dessus lorsqu'elle est visible */
+  z-index: 2;
   transform: rotateY(0deg);
-  justify-content: center; /* Centre verticalement le contenu de la face avant */
+  justify-content: center;
 }
 
 .card-back {
