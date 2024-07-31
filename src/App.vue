@@ -2,7 +2,7 @@
   <div class="app">
     <header>
       <h1>Random Cats</h1>
-      <button @click="loadCats">Reload Cats</button>
+      <button @click="loadCats" class="reload-button">Reload Cats</button>
     </header>
     <div class="cat-grid">
       <CatCard v-for="cat in getCats" :key="cat.id" :cat="cat" />
@@ -47,5 +47,24 @@ header {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  padding: 30px;
+}
+.reload-button {
+  background-color: #ff69b4;
+  border: 2px solid #ff69b4;
+  border-radius: 25px;
+  color: floralwhite;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+.reload-button:hover {
+  background-color: #ff1493;
+  border-color: #ff1493;
+}
+.reload-button:active {
+  background-color: #ff007f;
+  border-color: #ff007f;
 }
 </style>
