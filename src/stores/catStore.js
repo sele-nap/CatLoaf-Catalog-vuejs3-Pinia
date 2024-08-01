@@ -4,7 +4,7 @@ import { useFetch } from '@vueuse/core';
 
 export const useCatStore = defineStore('catStore', () => {
   const cats = ref([]);
-  const getCats = computed( () => cats)
+  const getCats = computed( () => cats);
 
   const firstNames = ['Whiskers', 'Fluffy', 'Mittens', 'Luna', 'Oliver', 'Leo', 'Milo', 'Kitty', 'Nala', 'Simba', 'Bella', 'Lucy', 'Charlie', 'Max', 'Tiger'];
   const lastNames = ['Pawsome', 'Purrington', 'Meowser', 'Clawsome', 'Whiskerston', 'Furbottom', 'Tailchaser', 'Scratchington', 'Fluffster', 'Purrfect'];

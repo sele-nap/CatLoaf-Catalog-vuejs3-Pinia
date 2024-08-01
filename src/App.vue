@@ -1,23 +1,32 @@
 <template>
   <div class="app">
     <header>
-      <h1>Random Cats</h1>
-      <button @click="loadCats" class="reload-button">Reload Cats</button>
+      <h1 @click="currentView = 'main'" :class="{ clickable: currentView !== 'main' }">Random cats</h1>
     </header>
-    <div class="cat-grid">
-      <CatCard v-for="cat in getCats" :key="cat.id" :cat="cat" />
-    </div>
-    <p>Number of cats: {{ getCats.length }}</p>
+
+    <Menu :currentView="currentView" @update:currentView="currentView = $event" />
+
+    <main v-if="currentView === 'main'">
+      <div class="cat-grid">
+        <CatCard v-for="cat in getCats" :key="cat.id" :cat="cat" />
+      </div>
+    </main>
+
+    <BookmarksView v-else-if="currentView === 'bookmarks'" @update:currentView="currentView = $event" />
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useCatStore } from './stores/catStore';
 import CatCard from './components/CatCard.vue';
+import BookmarksView from './components/BookmarksView.vue';
+import Menu from './components/Menu.vue';
 
 const catStore = useCatStore();
 const { getCats } = catStore;
+
+const currentView = ref('main');
 
 const loadCats = async () => {
   await catStore.fetchCats();
@@ -39,12 +48,10 @@ onMounted(() => {
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
   background-color: #ffb6c1;
   border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .cat-grid {
@@ -57,25 +64,7 @@ header {
   margin: 0 auto;
 }
 
-.reload-button {
-  background-color: #ff69b4;
-  border: 2px solid #ff69b4;
-  border-radius: 25px;
-  color: floralwhite;
-  padding: 10px 20px;
-  font-size: 16px;
+h1.clickable {
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  font-family: 'Lato', sans-serif;
-}
-
-.reload-button:hover {
-  background-color: #ff1493;
-  border-color: #ff1493;
-}
-
-.reload-button:active {
-  background-color: #ff007f;
-  border-color: #ff007f;
 }
 </style>

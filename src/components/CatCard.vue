@@ -9,12 +9,15 @@
         <p>{{ cat.fact }}</p>
       </div>
     </div>
+    <button @click.stop="toggleBookmark" class="bookmark-btn">
+      {{ isBookmarked ? '★' : '☆' }}
+    </button>
   </div>
 </template>
 
-
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useBookmarkStore } from '../stores/bookmarkStore';
 
 const props = defineProps({
   cat: {
@@ -23,7 +26,20 @@ const props = defineProps({
   }
 });
 
+const bookmarkStore = useBookmarkStore();
 const flipped = ref(false);
+
+const isBookmarked = computed(() => 
+  bookmarkStore.getBookmarks.some(bookmark => bookmark.id === props.cat.id)
+);
+
+const toggleBookmark = () => {
+  if (isBookmarked.value) {
+    bookmarkStore.removeBookmark(props.cat.id);
+  } else {
+    bookmarkStore.addBookmark(props.cat);
+  }
+};
 
 const flipCard = () => {
   flipped.value = !flipped.value;
@@ -64,6 +80,8 @@ const flipCard = () => {
   z-index: 2;
   transform: rotateY(0deg);
   justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .card-back {
@@ -101,5 +119,16 @@ const flipCard = () => {
   margin: 0;
   text-align: center;
   max-width: 100%;
+}
+
+.bookmark-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #ff69b4;
 }
 </style>
