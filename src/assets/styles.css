@@ -1,0 +1,112 @@
+body {
+  background-color: var(--bg);
+  font-family: 'Segoe UI', sans-serif;
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+:root {
+  --bg: #f4ebf8;;
+  --text: #4a3b5c;
+  --card: #fff;
+  --card-back: #ede3f6;
+  --accent: #c2a4e3;
+  --accent-hover: #ab8dd7;
+}
+
+body.dark {
+  --bg: #2a1e3f;
+  --text: #e6d7ff;
+  --card: #3c2c57;
+  --card-back: #4a3672;
+  --accent: #9d7bcf;
+  --accent-hover: #7e5fad;
+}
+
+header, footer {
+  background-color: var(--accent);
+  padding: 1rem;
+  text-align: center;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.no-results {
+  text-align: center;
+  font-style: italic;
+  color: #8b78a7;
+  margin-top: 2rem;
+}
+
+.cat-card {
+  width: 200px;
+  height: 260px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+
+.cat-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+  transform-style: preserve-3d;
+}
+
+.cat-card.flipped .cat-card-inner {
+  transform: rotateY(180deg);
+}
+
+.cat-card-front, .cat-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: var(--card);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cat-card-back {
+  transform: rotateY(180deg);
+  background-color: var(--card-back);
+}
+
+button {
+  margin-top: 0.5rem;
+  background-color: var(--accent);
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--accent-hover);
+}

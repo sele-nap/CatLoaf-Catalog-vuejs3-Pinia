@@ -1,15 +1,16 @@
 <template>
   <div class="app">
     <header>
-      <h1 @click="currentView = 'main'" :class="{ clickable: currentView !== 'main' }">Random cats</h1>
+      <h1 @click="currentView = 'main'" :class="{ clickable: currentView !== 'main' }">Random Cats</h1>
     </header>
 
     <Menu :currentView="currentView" @update:currentView="currentView = $event" />
 
     <main v-if="currentView === 'main'">
-      <div class="cat-grid">
+      <div v-if="getCats.length > 0" class="cat-grid">
         <CatCard v-for="cat in getCats" :key="cat.id" :cat="cat" />
       </div>
+      <p v-else class="no-results">No cats found 😿</p>
     </main>
 
     <BookmarksView v-else-if="currentView === 'bookmarks'" @update:currentView="currentView = $event" />
@@ -17,24 +18,20 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useCatStore } from './stores/catStore';
-import CatCard from './components/CatCard.vue';
-import BookmarksView from './components/BookmarksView.vue';
-import Menu from './components/Menu.vue';
+import { ref, onMounted } from 'vue'
+import { useCatalogStore } from './stores/catalog'
+import CatCard from './components/CatCard.vue'
+import BookmarksView from './views/BookmarksView.vue'
+import Menu from './components/Menu.vue'
 
-const catStore = useCatStore();
-const { getCats } = catStore;
+const currentView = ref('main')
 
-const currentView = ref('main');
-
-const loadCats = async () => {
-  await catStore.fetchCats();
-};
+const catalog = useCatalogStore()
+const { getProducts: getCats, fetchCatalog } = catalog
 
 onMounted(() => {
-  loadCats();
-});
+  fetchCatalog()
+})
 </script>
 
 <style scoped>
@@ -42,13 +39,13 @@ onMounted(() => {
 
 .app {
   text-align: center;
-  background-color: #fff0f5;
+  background-color: var(--bg);
   padding: 20px;
   font-family: 'Lato', sans-serif;
 }
 
 header {
-  background-color: #ffb6c1;
+  background-color: var(--accent);
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
@@ -56,7 +53,7 @@ header {
 
 .cat-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
   justify-content: center;
   padding: 30px;
@@ -66,5 +63,11 @@ header {
 
 h1.clickable {
   cursor: pointer;
+}
+
+.no-results {
+  font-style: italic;
+  color: var(--text);
+  margin-top: 2rem;
 }
 </style>

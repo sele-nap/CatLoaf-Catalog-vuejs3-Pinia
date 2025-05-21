@@ -1,56 +1,33 @@
 <template>
   <nav class="menu">
-    <button @click="switchView('main')" :class="{ active: currentView === 'main' }">Reload Cats</button>
-    <button @click="switchView('bookmarks')" :class="{ active: currentView === 'bookmarks' }">My Bookmarks</button>
+    <button @click="$emit('update:currentView', 'main')">🐱 Cats</button>
+    <button @click="$emit('update:currentView', 'bookmarks')">💖 Bookmarks</button>
   </nav>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-
-const props = defineProps({
-  currentView: {
-    type: String,
-    required: true
-  }
-});
-
-const emit = defineEmits(['update:currentView']);
-
-const switchView = (view) => {
-  emit('update:currentView', view);
-};
+defineProps(['currentView'])
 </script>
 
 <style scoped>
 .menu {
+  margin: 20px auto;
   display: flex;
   justify-content: center;
-  gap: 20px;
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 50px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  gap: 1rem;
 }
 
-.horizontal-menu button {
-  background: none;
+button {
+  background-color: var(--accent);
   border: none;
-  padding: 10px 20px;
-  font-size: 16px;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 5px;
+  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  font-family: 'Lato', sans-serif;
-  border-radius: 25px;
 }
 
-.horizontal-menu button.active {
-  background-color: #ff69b4;
-  color: #fff;
-}
-
-.horizontal-menu button:hover {
-  background-color: #ff1493;
-  color: #fff;
+button:hover {
+  background-color: var(--accent-hover);
 }
 </style>
