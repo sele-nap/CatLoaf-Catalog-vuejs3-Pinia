@@ -12,7 +12,7 @@ async function getRandomImage(): Promise<string> {
 
 async function getRandomFact(): Promise<string> {
   const { data } = await axios.get('https://catfact.ninja/fact');
-  return data?.fact || 'Les chats dorment en moyenne 12 à 16 heures par jour.';
+  return data?.fact || 'Cats sleep an average of 12 to 16 hours a day.';
 }
 
 async function getRandomName(): Promise<string> {
