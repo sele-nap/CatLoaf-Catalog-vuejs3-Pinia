@@ -1,0 +1,2 @@
+export type User = { id: number; email: string; password_hash: string; created_at: string };
+export type Favorite = { id: number; user_id: number; image_url: string; fact: string; name: string; created_at: string };
