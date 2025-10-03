@@ -5,6 +5,7 @@
   --accent-2: #d8ccff;
   --text: #3a2a4d;
   --muted: #6b5a7a;
+  --accent-muted: #e6deff;
 }
 
 * {
@@ -243,4 +244,9 @@ body {
 
 .btn.status:focus {
   outline: none;
+}
+
+.btn.secondary.status {
+  background: var(--accent-muted);
+  color: var(--muted);
 }
