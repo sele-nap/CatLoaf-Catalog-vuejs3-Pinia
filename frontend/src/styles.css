@@ -53,7 +53,7 @@ body {
   cursor: pointer;
   font-weight: 700;
   box-shadow: 0 6px 20px rgba(185, 166, 255, .4);
-  transition: transform .05s ease
+  transition: transform .05s ease, opacity .2s ease;
 }
 
 .btn:active {
@@ -159,18 +159,6 @@ body {
   position: fixed;
   right: 16px;
   bottom: 16px
-}
-
-.toast .actions {
-  margin-left: 10px;
-}
-
-.toast .link {
-  background: #fff;
-  border-radius: 10px;
-  padding: 4px 8px;
-  font-weight: 800;
-  cursor: pointer;
 }
 
 .auth {
