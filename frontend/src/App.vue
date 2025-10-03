@@ -12,7 +12,7 @@
       </button>
     </div>
 
-    <section v-if="!showFavs" class="grid">
+    <section v-if="!showFavs || !auth.isAuthed" class="grid">
       <CatCard v-for="(c, i) in cats" :key="i" v-bind="c" :is-favorite="favs.isFavorited(c.image_url)"
         @refresh="replace(i)" @favorite="favorite(c)" />
     </section>

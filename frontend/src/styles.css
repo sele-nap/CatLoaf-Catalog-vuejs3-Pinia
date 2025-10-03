@@ -225,3 +225,22 @@ body {
 .icon-btn.remove {
   background: var(--accent-2);
 }
+
+.text-link {
+  color: var(--text);
+  text-decoration: underline;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.text-link:hover {
+  opacity: .8;
+}
+
+.btn.status {
+  pointer-events: none;
+}
+
+.btn.status:focus {
+  outline: none;
+}
