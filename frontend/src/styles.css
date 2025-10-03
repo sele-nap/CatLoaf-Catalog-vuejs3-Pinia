@@ -161,6 +161,18 @@ body {
   bottom: 16px
 }
 
+.toast .actions {
+  margin-left: 10px;
+}
+
+.toast .link {
+  background: #fff;
+  border-radius: 10px;
+  padding: 4px 8px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
 .auth {
   display: flex;
   align-items: center;
@@ -204,4 +216,24 @@ body {
   font-size: 12px;
   font-weight: 800;
   box-shadow: 0 6px 16px rgba(0, 0, 0, .08);
+}
+
+.icon-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  border-radius: 999px;
+  width: 34px;
+  height: 34px;
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
+  font-weight: 900;
+  cursor: pointer;
+  line-height: 34px;
+  text-align: center;
+}
+
+.icon-btn.remove {
+  background: var(--accent-2);
 }

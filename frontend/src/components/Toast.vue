@@ -1,11 +1,13 @@
 <template>
-  <div v-if="msg" class="toast">
-    <div class="tag">{{ msg }}</div>
+  <div v-if="text || undo" class="toast">
+    <div class="tag">
+      <span>{{ text }}</span>
+      <span v-if="undo" class="actions">
+        <button class="link" @click="$emit('undo')">Undo</button>
+      </span>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-const props = defineProps<{ text?: string }>();
-const msg = ref('');
-onMounted(() => { if (props.text) { msg.value = props.text; setTimeout(() => msg.value = '', 2000); } });
+defineProps<{ text?: string, undo?: boolean }>();
 </script>

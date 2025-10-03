@@ -14,14 +14,14 @@
 
     <section v-if="!showFavs" class="grid">
       <CatCard v-for="(c, i) in cats" :key="i" v-bind="c" :is-favorite="favs.isFavorited(c.image_url)"
-        @refresh="replace(i)" @favorite="favorite(c)" />
+        @refresh="replace(i)" @favorite="favorite(c)" @toggle-favorite="toggleFavorite(c)" />
     </section>
 
     <section v-else class="grid">
-      <div v-for="f in favs.items" :key="f.id" class="card">
+      <div v-for="f in favs.items" :key="f.id" class="card" @click="">
         <div class="card-inner">
           <div class="face front">
-            <span class="fav-badge">★ Favorite</span>
+            <button class="icon-btn remove" title="Remove" @click.stop="removeFav(f.id)">✕</button>
             <img class="img" :src="f.image_url" alt="cat" />
             <div class="title">{{ f.name }} <span class="tag">favorite</span></div>
           </div>
@@ -36,7 +36,7 @@
       </div>
     </section>
 
-    <Toast :text="toast" />
+    <Toast :text="toast" :undo="!!lastDeleted" @undo="undoDelete" />
   </div>
 </template>
 
@@ -57,6 +57,8 @@ const showFavs = ref(false);
 export type Cat = { image_url: string; fact: string; name: string };
 const cats = ref<Cat[]>([]);
 
+const lastDeleted = ref<null | { timer: any, item: any }>(null);
+
 async function fetchOne(): Promise<Cat> {
   const { data } = await api.get('/cats/random');
   return data as Cat;
@@ -72,8 +74,37 @@ async function favorite(c: Cat) {
   toast.value = 'Added to favorites!';
 }
 
+async function toggleFavorite(c: any) {
+  if (!auth.isAuthed) { toast.value = 'Log in to manage favorites'; return; }
+  if (favs.isFavorited(c.image_url)) {
+    const removed = await favs.removeByImage(c.image_url);
+    toast.value = 'Removed from favorites';
+    if (lastDeleted.value?.timer) clearTimeout(lastDeleted.value.timer);
+    lastDeleted.value = {
+      item: removed,
+      timer: setTimeout(() => { lastDeleted.value = null; }, 5000)
+    };
+  } else {
+    await favs.add(c as any);
+    toast.value = 'Added to favorites!';
+  }
+}
+
+async function undoDelete() {
+  const payload = lastDeleted.value?.item;
+  if (!payload) return;
+  await favs.add({ image_url: payload.image_url, fact: payload.fact, name: payload.name } as any);
+  toast.value = 'Restored to favorites';
+  if (lastDeleted.value?.timer) clearTimeout(lastDeleted.value.timer);
+  lastDeleted.value = null;
+}
+
+async function removeFav(id: number) {
+  await favs.remove(id);
+  toast.value = 'Favorite removed';
+}
+
 function toggleShowFavs() { showFavs.value = !showFavs.value; if (showFavs.value) favs.load(); }
-async function removeFav(id: number) { await favs.remove(id); toast.value = 'Favorite removed'; }
 
 onMounted(() => { auth.init(); fetchCats(); });
 </script>

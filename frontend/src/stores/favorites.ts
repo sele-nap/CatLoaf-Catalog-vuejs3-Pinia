@@ -24,6 +24,9 @@ export const useFavorites = defineStore('favorites', {
     isFavorited(image_url: string) {
       return this.items.some(i => i.image_url === image_url);
     },
+    findByImage(image_url: string) {
+      return this.items.find(i => i.image_url === image_url);
+    },
     async add(cat: Omit<Fav, 'id' | 'created_at'>) {
       if (this.isFavorited(cat.image_url)) return;
       try {
@@ -41,6 +44,12 @@ export const useFavorites = defineStore('favorites', {
     async remove(id: number) {
       await api.delete(`/favorites/${id}`);
       this.items = this.items.filter(x => x.id !== id);
+    },
+    async removeByImage(image_url: string) {
+      const hit = this.findByImage(image_url);
+      if (!hit) return;
+      await this.remove(hit.id);
+      return hit;
     },
   },
 });
