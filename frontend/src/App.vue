@@ -6,7 +6,7 @@
     </header>
 
     <div class="row" style="margin:8px 0 16px">
-      <button class="btn" @click="fetchCats">New cats</button>
+      <button class="btn" @click="goToNewCats">New cats</button>
       <button class="btn secondary" v-if="auth.isAuthed" @click="toggleShowFavs">
         {{ showFavs ? 'Show cards' : 'View my favorites' }}
       </button>
@@ -50,6 +50,11 @@ async function fetchOne(): Promise<Cat> {
 
 async function fetchCats() { cats.value = await Promise.all(Array.from({ length: 8 }).map(() => fetchOne())); }
 async function replace(i: number) { cats.value[i] = await fetchOne(); }
+
+async function goToNewCats() {
+  showFavs.value = false;
+  await fetchCats();
+}
 
 async function favorite(c: Cat) {
   if (!auth.isAuthed) { toast.value = 'Log in to add a favorite'; return; }
