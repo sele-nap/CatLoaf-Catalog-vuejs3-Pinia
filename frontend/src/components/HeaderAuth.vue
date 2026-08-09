@@ -20,45 +20,62 @@
     </template>
 
     <div v-if="open" class="modal" @click.self="close">
-      <div class="modal-card">
-        <h3>{{ mode === 'login' ? 'Log in' : 'Create an account' }}</h3>
+      <div class="auth-modal">
+        <div class="auth-form">
+          <div class="auth-form-inner">
+            <div class="auth-brand">🐾 Cozy Cats</div>
 
-        <div class="row">
-          <input class="input" v-model="email" placeholder="Email" />
+            <h3 class="auth-title">
+              {{ mode === 'login' ? 'Meow back' : 'Create an account' }}
+            </h3>
+            <p class="auth-subtitle">
+              {{
+                mode === 'login'
+                  ? 'Please enter your details'
+                  : 'Sign up to save your favorites'
+              }}
+            </p>
+
+            <label class="field-label">Email</label>
+            <input class="input" v-model="email" placeholder="you@meow.cat" />
+
+            <label class="field-label">Password</label>
+            <input
+              class="input"
+              type="password"
+              v-model="password"
+              placeholder="••••••••"
+            />
+
+            <span class="auth-error" v-if="error">{{ error }}</span>
+
+            <button class="auth-submit" @click="submit" :disabled="loading">
+              {{ mode === 'login' ? 'Sign in' : 'Create account' }}
+            </button>
+
+            <div class="auth-switch">
+              <template v-if="mode === 'login'">
+                No account?
+                <a href="#" class="text-link" @click.prevent="mode = 'register'"
+                  >Create an account</a
+                >
+              </template>
+              <template v-else>
+                Already have an account?
+                <a href="#" class="text-link" @click.prevent="mode = 'login'"
+                  >Sign in</a
+                >
+              </template>
+            </div>
+          </div>
         </div>
 
-        <div class="row">
-          <input
-            class="input"
-            type="password"
-            v-model="password"
-            placeholder="Password"
+        <div class="auth-visual">
+          <img
+            src="https://placecats.com/millie/600/800"
+            alt=""
+            class="auth-visual-img"
           />
-        </div>
-
-        <div
-          class="row"
-          style="justify-content: space-between; margin-top: 10px"
-        >
-          <button class="btn" @click="submit" :disabled="loading">
-            {{ mode === 'login' ? 'Login' : 'Register' }}
-          </button>
-          <span class="small" v-if="error">{{ error }}</span>
-        </div>
-
-        <div class="small" style="margin-top: 8px">
-          <template v-if="mode === 'login'">
-            No account?
-            <a href="#" class="text-link" @click.prevent="mode = 'register'"
-              >Register</a
-            >
-          </template>
-          <template v-else>
-            Already have an account?
-            <a href="#" class="text-link" @click.prevent="mode = 'login'"
-              >Login</a
-            >
-          </template>
         </div>
       </div>
     </div>
