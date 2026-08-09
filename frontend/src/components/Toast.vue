@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch, onBeforeUnmount } from 'vue';
+import { onBeforeUnmount, ref, watch } from 'vue';
 
 const props = defineProps<{
   text?: string;
@@ -18,14 +18,17 @@ const props = defineProps<{
   duration?: number;
 }>();
 
-const emit = defineEmits<{ (e: 'cleared'): void }>();
+const emit = defineEmits<{ (e: 'cleared'): void; (e: 'undo'): void }>();
 
 const msg = ref('');
 const visible = ref(false);
 let timer: ReturnType<typeof setTimeout> | null = null;
 
 function schedule() {
-  if (timer) { clearTimeout(timer); timer = null; }
+  if (timer) {
+    clearTimeout(timer);
+    timer = null;
+  }
 
   if (!props.text && !props.undo) {
     visible.value = false;
@@ -43,7 +46,11 @@ function schedule() {
   }, props.duration ?? 5000);
 }
 
-watch(() => [props.text, props.undo, props.duration], schedule, { immediate: true });
+watch(() => [props.text, props.undo, props.duration], schedule, {
+  immediate: true,
+});
 
-onBeforeUnmount(() => { if (timer) clearTimeout(timer); });
+onBeforeUnmount(() => {
+  if (timer) clearTimeout(timer);
+});
 </script>

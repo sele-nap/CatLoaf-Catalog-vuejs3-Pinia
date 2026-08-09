@@ -32,7 +32,9 @@ const password = 'password123';
 const hash = bcrypt.hashSync(password, 10);
 
 try {
-  const stmt = db.prepare('INSERT INTO users (email, password_hash) VALUES (?, ?)');
+  const stmt = db.prepare(
+    'INSERT INTO users (email, password_hash) VALUES (?, ?)',
+  );
   const info = stmt.run(email, hash);
   console.log('✅ Test user created successfully!');
   console.log(`   Email: ${email}`);

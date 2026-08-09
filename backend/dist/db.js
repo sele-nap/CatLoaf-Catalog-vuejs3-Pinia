@@ -1,9 +1,6 @@
 import Database from 'better-sqlite3';
-
 const db = new Database('cats.db');
-
 db.pragma('foreign_keys = ON');
-
 db.exec(`
 CREATE TABLE IF NOT EXISTS users (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -22,7 +19,6 @@ CREATE TABLE IF NOT EXISTS favorites (
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 `);
-
 db.exec(`
 -- keep only one row per (user_id, image_url)
 DELETE FROM favorites
@@ -36,5 +32,4 @@ WHERE rowid NOT IN (
 CREATE UNIQUE INDEX IF NOT EXISTS favorites_unique
 ON favorites(user_id, image_url);
 `);
-
 export default db;

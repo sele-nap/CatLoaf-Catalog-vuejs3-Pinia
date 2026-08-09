@@ -7,35 +7,30 @@
   --muted: #6b5a7a;
   --accent-muted: #e6deff;
 }
-
 * {
   box-sizing: border-box;
 }
-
 html,
 body,
 #app {
   height: 100%;
 }
-
 body {
   margin: 0;
   background: linear-gradient(180deg, var(--bg), #fff);
   font-family:
-    'Nunito',
+    Nunito,
     system-ui,
     Segoe UI,
     Roboto,
     Arial;
   color: var(--text);
 }
-
 .container {
   max-width: 1100px;
   margin: 0 auto;
   padding: 24px;
 }
-
 .header {
   display: flex;
   gap: 12px;
@@ -43,13 +38,11 @@ body {
   justify-content: space-between;
   margin-bottom: 20px;
 }
-
 .brand {
   font-weight: 800;
   font-size: 24px;
   letter-spacing: 0.5px;
 }
-
 .btn {
   background: var(--accent);
   border: none;
@@ -58,38 +51,32 @@ body {
   border-radius: 12px;
   cursor: pointer;
   font-weight: 700;
-  box-shadow: 0 6px 20px rgba(185, 166, 255, 0.4);
+  box-shadow: 0 6px 20px #b9a6ff66;
   transition:
     transform 0.05s ease,
     opacity 0.2s ease;
 }
-
 .btn:active {
   transform: translateY(1px);
 }
-
 .btn.secondary {
   background: var(--accent-2);
   color: var(--text);
 }
-
 .btn[disabled] {
   opacity: 0.55;
   cursor: not-allowed;
   box-shadow: none;
 }
-
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
 }
-
 .card {
   position: relative;
   perspective: 900px;
 }
-
 .card-inner {
   position: relative;
   width: 100%;
@@ -97,30 +84,26 @@ body {
   transform-style: preserve-3d;
   transition: transform 0.6s;
 }
-
 .card.flip .card-inner {
   transform: rotateY(180deg);
 }
-
 .face {
   position: absolute;
   inset: 0;
   background: var(--card);
   border-radius: 22px;
-  box-shadow: 0 10px 30px rgba(58, 42, 77, 0.1);
+  box-shadow: 0 10px 30px #3a2a4d1a;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   backface-visibility: hidden;
 }
-
 .face.back {
   transform: rotateY(180deg);
   padding: 18px;
   gap: 10px;
   justify-content: center;
 }
-
 .img {
   flex: 1;
   background: #eee;
@@ -129,30 +112,25 @@ body {
   height: 240px;
   object-fit: cover;
 }
-
 .title {
   padding: 12px 14px;
   font-weight: 800;
 }
-
 .small {
   color: var(--muted);
   font-size: 14px;
 }
-
 .input {
   padding: 10px 12px;
   border-radius: 12px;
   border: 1px solid #e8e0ff;
   background: #fbf9ff;
 }
-
 .row {
   display: flex;
   gap: 10px;
   align-items: center;
 }
-
 .tag {
   display: inline-block;
   background: var(--accent-2);
@@ -162,45 +140,39 @@ body {
   font-size: 12px;
   font-weight: 700;
 }
-
 .toast {
   position: fixed;
   right: 16px;
   bottom: 16px;
 }
-
 .auth {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.18);
+  background: #0000002e;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10000;
 }
-
 .modal-card {
   background: var(--card);
   border-radius: 20px;
   padding: 24px;
   min-width: 320px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px #0000001a;
   z-index: 10001;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
-
 .modal h3 {
   margin: 0;
 }
-
 .fav-badge {
   position: absolute;
   top: 10px;
@@ -211,9 +183,8 @@ body {
   border-radius: 999px;
   font-size: 12px;
   font-weight: 800;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 16px #00000014;
 }
-
 .icon-btn {
   position: absolute;
   top: 10px;
@@ -223,36 +194,30 @@ body {
   width: 34px;
   height: 34px;
   background: #fff;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 16px #0000001f;
   font-weight: 900;
   cursor: pointer;
   line-height: 34px;
   text-align: center;
 }
-
 .icon-btn.remove {
   background: var(--accent-2);
 }
-
 .text-link {
   color: var(--text);
   text-decoration: underline;
   font-weight: 800;
   cursor: pointer;
 }
-
 .text-link:hover {
   opacity: 0.8;
 }
-
 .btn.status {
   pointer-events: none;
 }
-
 .btn.status:focus {
   outline: none;
 }
-
 .btn.secondary.status {
   background: var(--accent-muted);
   color: var(--muted);

@@ -1,7 +1,12 @@
 <template>
   <div class="auth">
     <template v-if="isAuthed">
-      <button class="btn secondary status" type="button" aria-disabled="true" tabindex="-1">
+      <button
+        class="btn secondary status"
+        type="button"
+        aria-disabled="true"
+        tabindex="-1"
+      >
         Logged in
       </button>
       <button class="btn secondary" @click="logout">Logout</button>
@@ -9,7 +14,9 @@
 
     <template v-else>
       <button class="btn" @click="openModal('login')">Login</button>
-      <button class="btn secondary" @click="openModal('register')">Register</button>
+      <button class="btn secondary" @click="openModal('register')">
+        Register
+      </button>
     </template>
 
     <div v-if="open" class="modal" @click.self="close">
@@ -21,24 +28,36 @@
         </div>
 
         <div class="row">
-          <input class="input" type="password" v-model="password" placeholder="Password" />
+          <input
+            class="input"
+            type="password"
+            v-model="password"
+            placeholder="Password"
+          />
         </div>
 
-        <div class="row" style="justify-content:space-between; margin-top:10px;">
+        <div
+          class="row"
+          style="justify-content: space-between; margin-top: 10px"
+        >
           <button class="btn" @click="submit" :disabled="loading">
             {{ mode === 'login' ? 'Login' : 'Register' }}
           </button>
           <span class="small" v-if="error">{{ error }}</span>
         </div>
 
-        <div class="small" style="margin-top:8px;">
+        <div class="small" style="margin-top: 8px">
           <template v-if="mode === 'login'">
             No account?
-            <a href="#" class="text-link" @click.prevent="mode = 'register'">Register</a>
+            <a href="#" class="text-link" @click.prevent="mode = 'register'"
+              >Register</a
+            >
           </template>
           <template v-else>
             Already have an account?
-            <a href="#" class="text-link" @click.prevent="mode = 'login'">Login</a>
+            <a href="#" class="text-link" @click.prevent="mode = 'login'"
+              >Login</a
+            >
           </template>
         </div>
       </div>
@@ -47,7 +66,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useAuth } from '../stores/auth';
 
 type Mode = 'login' | 'register';
@@ -93,5 +112,7 @@ function logout() {
   auth.logout();
 }
 
-watch(open, (val) => { if (!val) clearFields(); });
+watch(open, (val) => {
+  if (!val) clearFields();
+});
 </script>
