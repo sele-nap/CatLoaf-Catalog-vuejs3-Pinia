@@ -71,11 +71,7 @@
         </div>
 
         <div class="auth-visual">
-          <img
-            src="https://placecats.com/millie/600/800"
-            alt=""
-            class="auth-visual-img"
-          />
+          <img src="/black-cat-auth.jpg" alt="" class="auth-visual-img" />
         </div>
       </div>
     </div>
